@@ -1,9 +1,10 @@
 import boto3
 import sys
+import time
  
 # Define the stack name with a timestamp
-# stack_name = f"SimpleS3Stack-{int(time.time())}"
-stack_name = "python-cf-stack"
+stack_name = f"SimpleS3Stack-{int(time.time())}"
+# stack_name = "python-cf-stack"
  
 # Initialize Boto3 CloudFormation client
 cf_client = boto3.client('cloudformation')
