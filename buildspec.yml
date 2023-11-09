@@ -1,0 +1,28 @@
+version: 0.2
+
+
+env:
+  variables:
+     ACCOUNT_ID_LIST: ""
+     CFN_NAME: ""   # Make sure the template name here matches the template name under cloudformation folder!
+
+phases:
+
+  pre_build:
+    commands:
+      - echo Entered the pre_build phase
+      - echo "CFN will be deployed..."
+
+
+  build:
+    commands:
+      - echo Entered the build phase...
+      - python scripts/deploy_cfn.py
+
+  post_build:
+    commands:
+      - echo Entered the post_build phase...
+      - echo Build completed on `date`
+
+
+
