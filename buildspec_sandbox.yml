@@ -16,8 +16,11 @@ phases:
 
   build:
     commands:
-      - echo Entered the build phase...
-      - python scripts/deploy_cfn.py
+      - git config --global credential.helper '!aws codecommit credential-helper $@'
+      - git config --global credential.UseHttpPath true
+      
+      - git clone https://github.com/mjs6898/demo-1.git
+      - python cf.py template.yaml
 
 
   post_build:
