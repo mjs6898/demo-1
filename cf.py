@@ -22,3 +22,5 @@ try:
     print(f"S3 stack {stack_name} creation initiated. StackId: {response['StackId']}")
 except Exception as e:
     print(f"Error creating S3 stack: {str(e)}")
+
+#...
