@@ -93,7 +93,7 @@ def check_stack_status(stack_name, assumed_session, account_id):
         if stack_status == 'CREATE_COMPLETE' or stack_status == 'UPDATE_COMPLETE':
             print(f"Stack {stack_name} lastest status in account {account_id} is a success.")
             success_accounts.append(account_id)
-            break
+        # break
         elif 'IN_PROGRESS' in stack_status:
             print(f"Stack deployment is in progress in account {account_id}. Waiting for 10 seconds...")
             time.sleep(10)
