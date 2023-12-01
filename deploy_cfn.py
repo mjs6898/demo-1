@@ -72,23 +72,23 @@ def create_update_stack(stack_name, assumed_session, account_id):
         except cf_client.exceptions.ClientError as e:
             print(f"Error creating stack {stack_name} in account {account_id}: {str(e)}")
 
-def describe_stack_status(stack_name, assumed_session,account_id):
-    client = assumed_session.client('cloudformation')
-    try:
-        response = client.describe_stacks(StackName=stack_name)
-        return response['Stacks'][0]['StackStatus']
-    except client.exceptions.ClientError as e:
-        print(f"Error describing stack {stack_name} in account {account_id}: {str(e)}")
-        return None
+# def describe_stack_status(stack_name, assumed_session,account_id):
+#     client = assumed_session.client('cloudformation')
+#     try:
+#         response = client.describe_stacks(StackName=stack_name)
+#         return response['Stacks'][0]['StackStatus']
+#     except client.exceptions.ClientError as e:
+#         print(f"Error describing stack {stack_name} in account {account_id}: {str(e)}")
+#         return None
 
 def check_stack_status(stack_name, assumed_session, account_id):
-    while True:
-        stack_status = describe_stack_status(stack_name, assumed_session,account_id)
+    # while True:
+    #     stack_status = describe_stack_status(stack_name, assumed_session,account_id)
 
-        if stack_status is None:
-            print(f"Unable to describe the stack {stack_name} status in account {account_id} due to creation error")
-            failed_accounts.append(account_id)
-            break
+    #     if stack_status is None:
+    #         print(f"Unable to describe the stack {stack_name} status in account {account_id} due to creation error")
+    #         failed_accounts.append(account_id)
+    #         break
 
         if stack_status == 'CREATE_COMPLETE' or stack_status == 'UPDATE_COMPLETE':
             print(f"Stack {stack_name} lastest status in account {account_id} is a success.")
