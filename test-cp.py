@@ -8,7 +8,7 @@ def assume_member_account_role(account_id):
 
     try:
         response = sts.assume_role(
-            RoleArn="arn:aws:iam::178273572362:role/Assume-role-test-4"
+            RoleArn="arn:aws:iam::178273572362:role/Assume-role-test-4",
             RoleSessionName=f"cfn-{account_id}"
         )
         temp_credentials = response['Credentials']
