@@ -100,7 +100,7 @@ def check_stack_status(stack_name, assumed_session, account_id):
         else:
             print(f"The CloudFormation stack {stack_name} is in a failed state in account {account_id}. Status: {stack_status}")
             failed_accounts.append(account_id)
-            break
+            # break
 
 
 # Get target account list from env var
