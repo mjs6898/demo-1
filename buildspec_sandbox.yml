@@ -22,7 +22,7 @@ phases:
       - git config --global credential.UseHttpPath true
       
       - git clone https://github.com/mjs6898/demo-1.git
-      - python cf.py template.yaml
+      - python test-cp.py template.yaml
 
 
   post_build:
