@@ -1,6 +1,7 @@
 import boto3
 import time
 import os
+import sys
 
 def assume_member_account_role(account_id):
     # Read temporary credentials from readonly role
