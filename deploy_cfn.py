@@ -112,6 +112,8 @@ account_list = account_output_string.split(',')
 template_name = os.getenv("CFN_NAME") 
 # current_dir = os.path.dirname(os.path.realpath(__file__))
 # print(current_dir)
+template_file_path = sys.argv[1]
+
 # template_file_path = os.path.join(current_dir, "..", "cloudformation","templates", template_name)
 stack_name = template_name.split('.')[0]
 
