@@ -21,7 +21,7 @@ def create_cloudformation_stack(stack_name, template_file, credentials):
         template_body = file.read()
  
     response = cloudformation_client.create_stack(
-        StackName=stackname,
+        StackName=stack_name,
         TemplateBody=template_body,
         Capabilities=['CAPABILITY_NAMED_IAM']
     )
