@@ -31,7 +31,7 @@ def create_cloudformation_stack(stack_name, template_file, credentials):
     return response
  
 # Replace with your actual values
-org_role_arn =  "arn:aws:iam::178273572362:role/Assume-role-test-4"
+org_role_arn = "arn:aws:iam::682665177220:role/assume-role-2"
 session_name = 'AssumeRoleSession'
 stack_name = 'YourStackName'
 template_file_path = sys.argv[1]
