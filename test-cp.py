@@ -21,7 +21,7 @@ def create_cloudformation_stack(stack_name, template_file, credentials):
         template_body = file.read()
  
     response = cloudformation_client.create_stack(
-        StackName="CP-1",
+        StackName=stackname,
         TemplateBody=template_body,
         Capabilities=['CAPABILITY_NAMED_IAM']
     )
@@ -31,7 +31,7 @@ def create_cloudformation_stack(stack_name, template_file, credentials):
 # Replace with your actual values
 org_role_arn = "arn:aws:iam::682665177220:role/assume-role-2"
 session_name = 'AssumeRoleSession'
-# stack_name = 'YourStackName'
+stack_name = 'CP-automated'
 template_file_path = sys.argv[1]
  
 # Step 1: Assume role in the organization account
