@@ -101,7 +101,7 @@ for account_id in account_list:
 #     if assumed_session:
 #         check_stack_status(stack_name, assumed_session, account_id)
 
-print(f"Stack deployment completed successfully for those accounts: {success_accounts}")
-print(f"Stack deployment failed for those accounts: {failed_accounts}")
+# print(f"Stack deployment completed successfully for those accounts: {success_accounts}")
+# print(f"Stack deployment failed for those accounts: {failed_accounts}")
 
    
