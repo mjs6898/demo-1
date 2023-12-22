@@ -3,6 +3,8 @@ import time
 import sys
 import os
 
+
+
 account_input_string = os.getenv("ACCOUNT_ID_LIST")
 account_output_string = account_input_string.replace(" ","")
 account_list = account_output_string.split(',')
