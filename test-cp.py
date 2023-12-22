@@ -3,9 +3,6 @@ import time
 import sys
 import os
 
-
-
-
 stack_name = f"SimpleS3Stack-{int(time.time())}"
 
 template_file_path = sys.argv[1]
@@ -19,7 +16,6 @@ def assume_member_account_role(account_id):
             RoleArn=f"arn:aws:iam::{account_id}:role/assume-role-2",
             RoleSessionName=f"cfn-{account_id}"
         )
-        print(account_id)
         temp_credentials = response['Credentials']
         # Use the temporary credentials to create a new session
         target_session = boto3.Session(
@@ -94,6 +90,8 @@ for account_id in account_list:
     assumed_session = assume_member_account_role(account_id)
     if assumed_session:
         create_update_stack(stack_name, assumed_session, account_id)
+        success_accounts.append(account_id)
+        print(f"Stack deployment completed successfully for those accounts: {success_accounts}")
     else:
         print(f"Unable to create or update {stack_name} in account {account_id} due to assume role issue")
         failed_accounts.append(account_id)
