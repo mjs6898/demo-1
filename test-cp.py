@@ -3,7 +3,8 @@ import time
 import sys
 import os
 
-stack_name = f"SimpleS3Stack-{int(time.time())}"
+#stack_name = f"SimpleS3Stack-{int(time.time())}"
+stack_name = "SimpleS3Stack-1703225608"
 
 template_file_path = sys.argv[1]
 
