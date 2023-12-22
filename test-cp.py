@@ -3,8 +3,8 @@ import time
 import sys
 import os
 
-#stack_name = f"SimpleS3Stack-{int(time.time())}"
-stack_name = "SimpleS3Stack-1703225608"
+stack_name = f"SimpleS3Stack-{int(time.time())}"
+#stack_name = "SimpleS3Stack-1703225608"
 
 template_file_path = sys.argv[1]
 
@@ -77,6 +77,35 @@ def create_update_stack(stack_name, assumed_session, account_id):
             print(f"Error creating stack {stack_name} in account {account_id}: {str(e)}")
 
 
+def describe_stack_status(stack_name, assumed_session,account_id):
+    client = assumed_session.client('cloudformation')
+    try:
+        response = client.describe_stacks(StackName=stack_name)
+        return response['Stacks'][0]['StackStatus']
+    except client.exceptions.ClientError as e:
+        print(f"Error describing stack {stack_name} in account {account_id}: {str(e)}")
+        return None
+
+def check_stack_status(stack_name, assumed_session, account_id):
+    while True:
+        stack_status = describe_stack_status(stack_name, assumed_session,account_id)
+
+        if stack_status is None:
+            print(f"Unable to describe the stack {stack_name} status in account {account_id} due to creation error")
+            failed_accounts.append(account_id)
+            break
+
+        if stack_status == 'CREATE_COMPLETE' or stack_status == 'UPDATE_COMPLETE':
+            print(f"Stack {stack_name} lastest status in account {account_id} is a success.")
+            success_accounts.append(account_id)
+            break
+        elif 'IN_PROGRESS' in stack_status:
+            print(f"Stack deployment is in progress in account {account_id}. Waiting for 10 seconds...")
+            time.sleep(10)
+        else:
+            print(f"The CloudFormation stack {stack_name} is in a failed state in account {account_id}. Status: {stack_status}")
+            failed_accounts.append(account_id)
+            break
 
 # Get target account list from env var
 account_input_string = os.getenv("ACCOUNT_ID_LIST")
@@ -86,24 +115,20 @@ account_list = account_output_string.split(',')
 success_accounts = []
 failed_accounts = []
 
-
 for account_id in account_list:
     assumed_session = assume_member_account_role(account_id)
     if assumed_session:
         create_update_stack(stack_name, assumed_session, account_id)
-        success_accounts.append(account_id)
-        print(f"Stack deployment completed successfully for those accounts: {success_accounts}")
     else:
         print(f"Unable to create or update {stack_name} in account {account_id} due to assume role issue")
         failed_accounts.append(account_id)
 
-# # Check cloudformation stack status
-# for account_id in account_list:
-#     assumed_session = assume_member_account_role(account_id)
-#     if assumed_session:
-#         check_stack_status(stack_name, assumed_session, account_id)
+# Check cloudformation stack status
+for account_id in account_list:
+    assumed_session = assume_member_account_role(account_id)
+    if assumed_session:
+        check_stack_status(stack_name, assumed_session, account_id)
 
-# print(f"Stack deployment completed successfully for those accounts: {success_accounts}")
-# print(f"Stack deployment failed for those accounts: {failed_accounts}")
+print(f"Stack deployment completed successfully for those accounts: {success_accounts}")
+print(f"Stack deployment failed for those accounts: {failed_accounts}")
 
-   
