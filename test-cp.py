@@ -4,6 +4,8 @@ import sys
 import os
 
 
+
+
 stack_name = f"SimpleS3Stack-{int(time.time())}"
 
 template_file_path = sys.argv[1]
