@@ -5,7 +5,7 @@ version: 0.2
 
 env:
   variables:
-     ACCOUNT_ID_LIST: "682665177220"
+     ACCOUNT_ID_LIST: !include acccount-ids.txt
      CFN_NAME: ""   # Make sure the template name here matches the template name under cloudformation folder!
 
 phases:
