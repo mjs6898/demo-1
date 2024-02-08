@@ -3,6 +3,10 @@ import time
 import sys
 import os
 
+
+with open("acccount-ids.txt", "r") as file:
+    account_input_string = file.read().strip()
+
 stack_name = f"SimpleS3Stack-{int(time.time())}"
 #stack_name = "SimpleS3Stack-1703225608"
 
@@ -108,7 +112,8 @@ def check_stack_status(stack_name, assumed_session, account_id):
             break
 
 # Get target account list from env var
-account_input_string = os.getenv("ACCOUNT_ID_LIST")
+#account_input_string = os.getenv("ACCOUNT_ID_LIST")
+os.environ["ACCOUNT ID_LIST"] = account_input_string
 account_output_string = account_input_string.replace(" ","")
 account_list = account_output_string.split(',')
 
